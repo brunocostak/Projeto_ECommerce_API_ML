@@ -6,21 +6,27 @@ import * as api from '../services/api';
 class Home extends React.Component {
   state = {
     list: [],
+    categories: [],
   };
 
   componentDidMount() {
     api.getCategories().then((categories) => {
-      this.setState({ list: categories });
+      this.setState({ categories });
     });
+
+    api.getProductsFromCategoryAndQuery('Roda').then((products) => {
+      this.setState({ list: products });
+    });
+    console.log(this.state.list);
   }
 
   render() {
-    const { list } = this.state;
+    const { list, categories } = this.state;
     return (
       <>
         <div>
           <Categories
-            categories={ list }
+            categories={ categories }
           />
           ;
         </div>
