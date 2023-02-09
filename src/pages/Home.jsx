@@ -1,15 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Categories from '../components/Categories';
+import * as api from '../services/api';
 
 class Home extends React.Component {
   state = {
     list: [],
   };
 
+  componentDidMount() {
+    api.getCategories().then((categories) => {
+      this.setState({ list: categories });
+    });
+  }
+
   render() {
     const { list } = this.state;
     return (
       <>
+        <div>
+          <Categories
+            categories={ list }
+          />
+          ;
+        </div>
         <div>
           <Link data-testid="shopping-cart-button" to="/cart">Carrinho</Link>
         </div>
