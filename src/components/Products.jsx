@@ -1,13 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-export default class Products extends React.Component {
-  render() {
-    const { products } = this.props;
-    return (
-      <div>
-        { products.map((product) => (
-          <div data-testid="product" key={ product.id }>
+export default function Products({ products }) {
+  return (
+    <div>
+      { products?.map((product) => (
+        <Link
+          data-testid="product-detail-link"
+          key={ product.id }
+          to={ `/product-details/${product.id}` }
+        >
+          <div data-testid="product">
             <p>
               { product.title }
             </p>
@@ -16,10 +20,10 @@ export default class Products extends React.Component {
               { product.price }
             </p>
           </div>
-        )) }
-      </div>
-    );
-  }
+        </Link>
+      )) }
+    </div>
+  );
 }
 Products.propTypes = {
   products: PropTypes.arrayOf(PropTypes.shape({

@@ -1,25 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default class Categories extends React.Component {
-  render() {
-    const { categories } = this.props;
-    return (
-      <div>
-        {categories.map((category) => (
-          <button
-            type="button"
-            key={ category.id }
-            data-testid="category"
-            onClick={ () => onClick(category.id) }
-          >
-            {category.name}
-          </button>
-        ))}
-      </div>
-    );
-  }
+export default function Categories({ categories, onClickCat }) {
+  return (
+    <div>
+      {categories?.map((category) => (
+        <button
+          type="button"
+          key={ category.id }
+          name={ category.name }
+          data-testid="category"
+          onClick={ () => onClickCat(category.id) }
+        >
+          {category.name}
+        </button>
+      ))}
+    </div>
+  );
 }
+
 Categories.propTypes = {
-  categories: PropTypes.arrayOf(PropTypes.object).isRequired,
+  categories: PropTypes.arrayOf.isRequired,
+  onClickCat: PropTypes.func.isRequired,
 };
